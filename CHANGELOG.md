@@ -1,3 +1,11 @@
+### 3.12.4
+
+- Fix missing $ in $package_source variable
+
+### 3.12.3
+
+- Fix for splunk_os_user not being honored if set
+
 ### 3.12.2
 
 - Fixed multisite examples
