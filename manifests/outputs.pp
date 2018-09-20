@@ -27,11 +27,11 @@ class splunk::outputs (
   } else {
     $cm = $clustering[cm]
   }
-  if $clustering[pass4symmkey] == undef {
-    $pass4symmkey = $splunk::pass4symmkey
-  } else {
-    $pass4symmkey = $clustering[pass4symmkey]
-  }
+  #  if $clustering[pass4symmkey] == undef {
+  #  $pass4symmkey = $splunk::pass4symmkey
+  #} else {
+  #  $pass4symmkey = $clustering[pass4symmkey]
+  #}
   $splunk_app_name = 'puppet_common_ssl_outputs'
   if $tcpout == undef {
     file {"${splunk_home}/etc/apps/${splunk_app_name}":

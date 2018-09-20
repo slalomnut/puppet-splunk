@@ -66,7 +66,6 @@ describe 'splunk' do
         :type => 'uf',
       }
     }
-    it { should_not contain_file('/opt/splunk/etc/apps/puppet_indexer_cluster_pass4symmkey_base/local/server.conf') }
     it do
       should contain_package('splunkforwarder')
     end
