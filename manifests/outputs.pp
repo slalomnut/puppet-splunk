@@ -20,18 +20,18 @@ class splunk::outputs (
   $sslpassword = $splunk::sslpassword,
   $sslverifyservercert = $splunk::sslverifyservercert
 ){
-  # if $clustering[cm] == undef and $type == undef {
-  #  $cm = "${::fqdn}:8089"
-  #} elsif $clustering[cm] == undef and $type == 'uf' and $tcpout == 'indexer_discovery' {
-  #  fail 'please set cluster master when using indexer_discovery'
-  #} else {
-  #  $cm = $clustering[cm]
-  #}
-  #  if $clustering[pass4symmkey] == undef {
-  #  $pass4symmkey = $splunk::pass4symmkey
-  #} else {
-  #  $pass4symmkey = $clustering[pass4symmkey]
-  #}
+   if $clustering[cm] == undef and $type == undef {
+    $cm = "${::fqdn}:8089"
+  } elsif $clustering[cm] == undef and $type == 'uf' and $tcpout == 'indexer_discovery' {
+    fail 'please set cluster master when using indexer_discovery'
+  } else {
+    $cm = $clustering[cm]
+  }
+    if $clustering[pass4symmkey] == undef {
+    $pass4symmkey = $splunk::pass4symmkey
+  } else {
+    $pass4symmkey = $clustering[pass4symmkey]
+  }
   $splunk_app_name = 'puppet_common_ssl_outputs'
   if $tcpout == undef {
     file {"${splunk_home}/etc/apps/${splunk_app_name}":
