@@ -33,6 +33,7 @@ class splunk (
   $ds_intermediate            = $splunk::params::ds_intermediate,
   $ecdhcurvename_intermediate = $splunk::params::ecdhcurvename_intermediate,
   $ecdhcurvename_modern       = $splunk::params::ecdhcurvename_modern,
+  $heavy_fwdr                 = $splunk::params::heavy_fwdr,
   $httpport                   = $splunk::params::httpport,
   $inputport                  = $splunk::params::inputport,
   $kvstoreport                = $splunk::params::kvstoreport,
@@ -146,20 +147,14 @@ class splunk (
   }
 
   include splunk::installed
-  include splunk::inputs
-  include splunk::outputs
   include splunk::certs::s2s
   include splunk::certs::web
-  include splunk::web
   include splunk::server::general
-  include splunk::server::ssl
   include splunk::server::license
-  include splunk::server::kvstore
   include splunk::server::clustering
   include splunk::server::shclustering
   include splunk::server::diskusage
   include splunk::splunk_launch
-  include splunk::deploymentclient
   include splunk::distsearch
   include splunk::passwd
   include splunk::authentication
@@ -169,6 +164,17 @@ class splunk (
   include splunk::loglocal
   include splunk::limits
   include splunk::service
+  unless $heavy_fwdr {
+    include splunk::inputs
+    include splunk::outputs
+    include splunk::web
+    include splunk::deploymentclient
+    include splunk::server::kvstore
+    include splunk::server::ssl
+  }
+  if $heavy_fwdr {
+    include splunk::heavy_fwdr
+  }
 
   # make sure classes are properly ordered and contained
   anchor { 'splunk_first': }

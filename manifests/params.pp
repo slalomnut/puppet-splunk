@@ -41,6 +41,7 @@ class splunk::params (
   $ecdhcurvename_intermediate   = 'secp384r1'
   $ecdhcurvename_modern         = 'secp384r1'
   $httpport                     = undef
+  $heavy_fwdr                   = false
   $inputport                    = undef
   $kvstoreport                  = undef
   $lm                           = undef
